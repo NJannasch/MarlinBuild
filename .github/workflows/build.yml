@@ -1,0 +1,22 @@
+name: PlatformIO CI
+
+on: [push]
+
+env:
+  board: 'STM32F103RET6_creality'
+
+jobs:
+  build:
+    runs-on: python:3.9.0-buster
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Install Dependencies
+      run: |
+        pip install -U https://github.com/platformio/platformio-core/archive/develop.zip
+        platformio update
+        pip install PyYaml
+
+    - name: Run PlatformIO
+      run: pio run -e ${{ env.board }}
