@@ -32,8 +32,8 @@ jobs:
     - name: Set Marlin SHA Hash
       id: vars
       run: |
-      cd Marlin/
-      echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        cd Marlin/
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
     - name: Copy Configurations
       run: |
