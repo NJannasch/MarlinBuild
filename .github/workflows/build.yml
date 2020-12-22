@@ -1,4 +1,4 @@
-name: PlatformIO CI
+name: Marlin Firmware Build Pipeline
 
 on: [push]
 
@@ -30,7 +30,11 @@ jobs:
         ref: ${{ env.marlinBranch }}
     
     - name: Copy Configurations
-      run: echo "Test"
+      run: |
+        echo "Test"
+        ls
+        pwd
+        ls ../
 
     - name: Run PlatformIO
       run: pio run -e ${{ env.board }}
