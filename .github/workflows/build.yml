@@ -20,6 +20,16 @@ jobs:
         pip3 install -U https://github.com/platformio/platformio-core/archive/develop.zip
         platformio update
         pip3 install PyYaml
+    
+    - name: Checkout tools repo
+      uses: actions/checkout@v2
+      with:
+        repository: MarlinFirmware/Marlin
+        path: Marlin
+        ref: 'bugfix-2.0.x'
+    
+    - name: Copy Configurations
+      run: echo "Test"
 
     - name: Run PlatformIO
       run: pio run -e ${{ env.board }}
