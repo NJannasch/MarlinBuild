@@ -7,8 +7,7 @@ env:
 
 jobs:
   build:
-    runs-on: python:3.9.0-buster
-
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       
