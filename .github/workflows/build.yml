@@ -28,7 +28,13 @@ jobs:
         repository: MarlinFirmware/Marlin
         path: Marlin
         ref: ${{ env.marlinBranch }}
-    
+
+    - name: Set Marlin SHA Hash
+      id: vars
+      run: |
+      cd Marlin/
+      echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
     - name: Copy Configurations
       run: |
         cp -rf configurations/${{ env.board }}/Configuration.h Marlin/Marlin/
@@ -41,6 +47,6 @@ jobs:
     
     - uses: actions/upload-artifact@v2
       with:
-        name: firmware-${{ env.board }}
+        name: firmware-${{ env.board }}-${{ steps.vars.outputs.sha_short }}.bin
         path: Marlin/.pio/build/${{ env.board }}/*.bin
         retention-days: 14
