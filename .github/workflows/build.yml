@@ -13,9 +13,9 @@ jobs:
       
     - name: Install Dependencies
       run: |
-        pip install -U https://github.com/platformio/platformio-core/archive/develop.zip
+        pip3 install -U https://github.com/platformio/platformio-core/archive/develop.zip
         platformio update
-        pip install PyYaml
+        pip3 install PyYaml
 
     - name: Run PlatformIO
       run: pio run -e ${{ env.board }}
