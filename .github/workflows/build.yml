@@ -38,3 +38,9 @@ jobs:
       run: |
         cd Marlin/
         pio run -e ${{ env.board }}
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: firmware-${{ env.board }}
+        path: .pio/build/${{ env.board }}/*.bin
+        retention-days: 14
