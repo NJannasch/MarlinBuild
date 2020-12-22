@@ -31,10 +31,10 @@ jobs:
     
     - name: Copy Configurations
       run: |
-        echo "Test"
-        ls
-        pwd
-        ls ../
+        cp -rf configurations/${{ env.board }}/Configuration.h Marlin/Marlin/
+        cp -rf configurations/${{ env.board }}/Configuration_adv.h Marlin/Marlin/
 
     - name: Run PlatformIO
-      run: pio run -e ${{ env.board }}
+      run: |
+        cd Marlin/
+        pio run -e ${{ env.board }}
