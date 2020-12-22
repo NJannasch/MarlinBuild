@@ -4,7 +4,8 @@ on: [push]
 
 env:
   board: 'STM32F103RET6_creality'
-
+  marlinBranch: 'bugfix-2.0.x'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,12 +22,12 @@ jobs:
         platformio update
         pip3 install PyYaml
     
-    - name: Checkout tools repo
+    - name: Checkout Marlin repo
       uses: actions/checkout@v2
       with:
         repository: MarlinFirmware/Marlin
         path: Marlin
-        ref: 'bugfix-2.0.x'
+        ref: ${{ env.marlinBranch }}
     
     - name: Copy Configurations
       run: echo "Test"
