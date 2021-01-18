@@ -10,7 +10,7 @@ on:
       branch:
         description: 'Branch'
         required: true
-        default: 'marlinBranch'  
+        default: 'bugfix-2.0.x'  
   
 jobs:
   build:
