@@ -1,10 +1,16 @@
 name: Marlin Firmware Build Pipeline
 
-on: [push]
-
-env:
-  board: 'STM32F103RET6_creality'
-  marlinBranch: 'bugfix-2.0.x'
+on: 
+  workflow_dispatch:
+    inputs:
+      board:
+        description: 'board'     
+        required: true
+        default: 'STM32F103RET6_creality'
+      branch:
+        description: 'Branch'
+        required: true
+        default: 'marlinBranch'  
   
 jobs:
   build:
@@ -27,7 +33,7 @@ jobs:
       with:
         repository: MarlinFirmware/Marlin
         path: Marlin
-        ref: ${{ env.marlinBranch }}
+        ref: ${{ github.event.inputs.branch }}
 
     - name: Set Marlin SHA Hash
       id: vars
@@ -43,10 +49,10 @@ jobs:
     - name: Run PlatformIO
       run: |
         cd Marlin/
-        pio run -e ${{ env.board }}
+        pio run -e ${{ github.event.inputs.board }}
     
     - uses: actions/upload-artifact@v2
       with:
-        name: firmware-${{ env.board }}-${{ steps.vars.outputs.sha_short }}.bin
-        path: Marlin/.pio/build/${{ env.board }}/*.bin
+        name: firmware-${{ github.event.inputs.board }}-${{ steps.vars.outputs.sha_short }}.bin
+        path: Marlin/.pio/build/${{ github.event.inputs.board }}/*.bin
         retention-days: 14
