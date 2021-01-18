@@ -43,8 +43,8 @@ jobs:
 
     - name: Copy Configurations
       run: |
-        cp -rf configurations/${{ env.board }}/Configuration.h Marlin/Marlin/
-        cp -rf configurations/${{ env.board }}/Configuration_adv.h Marlin/Marlin/
+        cp -rf configurations/${{ github.event.inputs.board }}/Configuration.h Marlin/Marlin/
+        cp -rf configurations/${{ github.event.inputs.board }}/Configuration_adv.h Marlin/Marlin/
 
     - name: Run PlatformIO
       run: |
